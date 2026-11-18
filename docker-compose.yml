@@ -1,0 +1,15 @@
+services:
+  novashift:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      APP_PASSWORD: ${APP_PASSWORD}
+      ALLOWED_DOMAINS: ${ALLOWED_DOMAINS:-youtube.com,youtu.be}
+      MAX_ACTIVE_JOBS: 2
+      MAX_DURATION_SECONDS: 7200
+      MAX_FILE_MB: 1024
+    volumes:
+      - ./downloads:/app/downloads
+    restart: unless-stopped
